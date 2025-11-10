@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osancak <osancak@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: eratasoy <eratasoy@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 04:43:49 by eratasoy          #+#    #+#             */
-/*   Updated: 2025/10/05 12:50:42 by osancak          ###   ########.fr       */
+/*   Updated: 2025/11/10 22:07:20 by eratasoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include <libft.h>
+# include "libft/libft.h"
 
+
+typedef struct s_stack
+{
+	int				value;
+	struct s_stack	*next;
+	struct s_stack	*prev;
+
+	
+}					t_stack;
 
 #endif
