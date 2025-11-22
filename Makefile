@@ -1,30 +1,35 @@
 NAME = push_swap
 
-
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+
 CFILES = \
 	main.c \
 	error.c \
-	arg_check.c \
-
+	parse_args.c \
+	push.c \
+	swap.c \
+	rotate.c \
+	reverse_rotate.c \
+	stack_utils.c \
+	sort_three.c \
+	turk_sort.c \
+	turk_init.c \
+	turk_cost.c \
+	turk_move.c
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 OFILES = $(CFILES:.c=.o)
 
-
 all: $(LIBFT) $(NAME)
-
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OFILES)
-	$(MAKE) -C $(MLX_DIR)
 	$(CC) $(CFLAGS) $(OFILES) $(LIBFT) -o $(NAME)
-
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

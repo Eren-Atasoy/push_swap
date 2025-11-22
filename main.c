@@ -124,20 +124,16 @@ int main(int argc, char **argv)
         i++;
     }
 
-    // --- BURADA SIRALAMA ALGORİTMASINI ÇAĞIRACAKSIN ---
-    // if (!is_sorted(a))
-    //    sort_stack(&a, &b);
-    
-    // Test için yazdırabilirsin (Proje teslim ederken sil):
-    /*
-    t_stack *curr = a;
-    if (curr) {
-        do {
-            printf("%d\n", curr->value);
-            curr = curr->next;
-        } while (curr != a);
+    // --- SIRALAMA ALGORİTMASI ---
+    if (!is_sorted(a))
+    {
+        if (stack_size(a) == 2)
+            sa(&a);
+        else if (stack_size(a) == 3)
+            sort_three(&a);
+        else
+            sort_stack(&a, &b);
     }
-    */
 
     // Program bitişinde her şeyi temizle
     free_stack(&a);
