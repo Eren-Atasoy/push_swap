@@ -43,6 +43,8 @@ static t_stack	*find_target_a(t_stack *a, int b_value)
 	t_stack	*tmp;
 	long	best_match;
 
+	if (!a)
+		return (NULL);
 	best_match = 2147483648;
 	tmp = a;
 	target_node = NULL;
@@ -82,6 +84,8 @@ static t_stack	*find_target_b(t_stack *b, int a_value)
 	t_stack	*tmp;
 	long	best_match;
 
+	if (!b)
+		return (NULL);
 	best_match = -2147483649;
 	tmp = b;
 	target_node = NULL;
@@ -105,6 +109,8 @@ void	set_target_b(t_stack *a, t_stack *b)
 {
 	t_stack	*current_a;
 
+	if (!b)
+		return ;
 	current_a = a;
 	while (1)
 	{

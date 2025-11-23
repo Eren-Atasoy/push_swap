@@ -18,6 +18,8 @@ static void	cost_analysis_b(t_stack *a, t_stack *b)
 	int		len_b;
 	t_stack	*tmp;
 
+	if (!b)
+		return ;
 	len_a = stack_size(a);
 	len_b = stack_size(b);
 	tmp = a;
@@ -26,9 +28,9 @@ static void	cost_analysis_b(t_stack *a, t_stack *b)
 		tmp->push_cost = tmp->index;
 		if (!tmp->above_median)
 			tmp->push_cost = len_a - tmp->index;
-		if (tmp->target_node->above_median)
+		if (tmp->target_node && tmp->target_node->above_median)
 			tmp->push_cost += tmp->target_node->index;
-		else
+		else if (tmp->target_node)
 			tmp->push_cost += len_b - tmp->target_node->index;
 		tmp = tmp->next;
 		if (tmp == a)
@@ -39,16 +41,23 @@ static void	cost_analysis_b(t_stack *a, t_stack *b)
 static void	push_init(t_stack **a, t_stack **b)
 {
 	int	len;
+	int	b_size;
 
 	len = stack_size(*a);
 	while (len-- > 3 && !is_sorted(*a))
 	{
 		set_index(*a);
 		set_index(*b);
-		set_target_b(*a, *b);
-		cost_analysis_b(*a, *b);
-		set_cheapest(*a);
-		move_a_to_b(a, b);
+		b_size = stack_size(*b);
+		if (b_size >= 2)
+		{
+			set_target_b(*a, *b);
+			cost_analysis_b(*a, *b);
+			set_cheapest(*a);
+			move_a_to_b(a, b);
+		}
+		else
+			pb(a, b);
 	}
 }
 
@@ -81,7 +90,7 @@ static void	push_back(t_stack **a, t_stack **b)
 
 void	sort_stack(t_stack **a, t_stack **b)
 {
-	int	len;
+	int len;
 
 	len = stack_size(*a);
 	if (len-- > 3 && !is_sorted(*a))
