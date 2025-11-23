@@ -15,9 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
 # include "libft/libft.h"
-
 
 typedef struct s_stack
 {
@@ -73,6 +71,5 @@ t_stack	*get_cheapest(t_stack *stack);
 void	prep_for_push(t_stack **stack, t_stack *top_node, char stack_name);
 void	move_a_to_b(t_stack **a, t_stack **b);
 void	move_b_to_a(t_stack **a, t_stack **b);
-void	min_on_top(t_stack **a);
 
 #endif

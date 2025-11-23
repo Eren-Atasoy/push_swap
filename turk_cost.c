@@ -77,4 +77,3 @@ t_stack	*get_cheapest(t_stack *stack)
 	}
 	return (NULL);
 }
-

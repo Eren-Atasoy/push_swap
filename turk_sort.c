@@ -52,6 +52,20 @@ static void	push_init(t_stack **a, t_stack **b)
 	}
 }
 
+static void	min_on_top(t_stack **a)
+{
+	t_stack	*min_node;
+
+	min_node = find_min(*a);
+	while (*a != min_node)
+	{
+		if (min_node->above_median)
+			ra(a);
+		else
+			rra(a);
+	}
+}
+
 static void	push_back(t_stack **a, t_stack **b)
 {
 	while (*b)
@@ -78,4 +92,3 @@ void	sort_stack(t_stack **a, t_stack **b)
 	sort_three(a);
 	push_back(a, b);
 }
-

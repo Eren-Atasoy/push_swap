@@ -12,6 +12,7 @@ CFILES = \
 	rotate.c \
 	reverse_rotate.c \
 	stack_utils.c \
+	stack_init.c \
 	sort_three.c \
 	turk_sort.c \
 	turk_init.c \

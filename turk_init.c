@@ -37,71 +37,80 @@ void	set_index(t_stack *stack)
 	}
 }
 
+static t_stack	*find_target_a(t_stack *a, int b_value)
+{
+	t_stack	*target_node;
+	t_stack	*tmp;
+	long	best_match;
+
+	best_match = 2147483648;
+	tmp = a;
+	target_node = NULL;
+	while (1)
+	{
+		if (tmp->value > b_value && tmp->value < best_match)
+		{
+			best_match = tmp->value;
+			target_node = tmp;
+		}
+		tmp = tmp->next;
+		if (tmp == a)
+			break ;
+	}
+	if (best_match == 2147483648)
+		return (find_min(a));
+	return (target_node);
+}
+
 void	set_target_a(t_stack *a, t_stack *b)
 {
 	t_stack	*current_b;
-	t_stack	*target_node;
-	t_stack	*tmp_a;
-	long	best_match_index;
 
 	current_b = b;
 	while (1)
 	{
-		best_match_index = 2147483648;
-		tmp_a = a;
-		while (1)
-		{
-			if (tmp_a->value > current_b->value
-				&& tmp_a->value < best_match_index)
-			{
-				best_match_index = tmp_a->value;
-				target_node = tmp_a;
-			}
-			tmp_a = tmp_a->next;
-			if (tmp_a == a)
-				break ;
-		}
-		if (best_match_index == 2147483648)
-			current_b->target_node = find_min(a);
-		else
-			current_b->target_node = target_node;
+		current_b->target_node = find_target_a(a, current_b->value);
 		current_b = current_b->next;
 		if (current_b == b)
 			break ;
 	}
 }
 
+static t_stack	*find_target_b(t_stack *b, int a_value)
+{
+	t_stack	*target_node;
+	t_stack	*tmp;
+	long	best_match;
+
+	best_match = -2147483649;
+	tmp = b;
+	target_node = NULL;
+	while (1)
+	{
+		if (tmp->value < a_value && tmp->value > best_match)
+		{
+			best_match = tmp->value;
+			target_node = tmp;
+		}
+		tmp = tmp->next;
+		if (tmp == b)
+			break ;
+	}
+	if (best_match == -2147483649)
+		return (find_max(b));
+	return (target_node);
+}
+
 void	set_target_b(t_stack *a, t_stack *b)
 {
 	t_stack	*current_a;
-	t_stack	*target_node;
-	t_stack	*tmp_b;
-	long	best_match_index;
 
 	current_a = a;
 	while (1)
 	{
-		best_match_index = -2147483649;
-		tmp_b = b;
-		while (1)
-		{
-			if (tmp_b->value < current_a->value
-				&& tmp_b->value > best_match_index)
-			{
-				best_match_index = tmp_b->value;
-				target_node = tmp_b;
-			}
-			tmp_b = tmp_b->next;
-			if (tmp_b == b)
-				break ;
-		}
-		if (best_match_index == -2147483649)
-			current_a->target_node = find_max(b);
-		else
-			current_a->target_node = target_node;
+		current_a->target_node = find_target_b(b, current_a->value);
 		current_a = current_a->next;
 		if (current_a == a)
 			break ;
 	}
 }
-

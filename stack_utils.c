@@ -89,4 +89,3 @@ int	is_sorted(t_stack *stack)
 	}
 	return (1);
 }
-
