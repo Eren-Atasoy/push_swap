@@ -12,62 +12,64 @@
 
 #include "push_swap.h"
 
-static void	process_argument(t_stack **a, char *arg)
+static void	stack_up(t_stack **a, char *arg)
 {
-	char	**tmp_argv;
-	int		j;
-	long	n;
+	char	**temp_argv;
+	t_stack	*new_node;
+	int		i;
+	long	number;
 
-	tmp_argv = ft_split(arg, ' ');
-	if (!tmp_argv || !*tmp_argv)
-		error_exit(a, tmp_argv, 1);
-	j = 0;
-	while (tmp_argv[j])
+	temp_argv = ft_split(arg, ' ');
+	if (!temp_argv || !*temp_argv)
+		error_handler(a, temp_argv, 1);
+	i = 0;
+	while (temp_argv[i])
 	{
-		if (!check_syntax(tmp_argv[j]))
-			error_exit(a, tmp_argv, 1);
-		n = ft_atol(tmp_argv[j]);
-		if (n > 2147483647 || n < -2147483648)
-			error_exit(a, tmp_argv, 1);
-		if (check_duplicate(*a, (int)n))
-			error_exit(a, tmp_argv, 1);
-		add_stack_node_end(a, create_stack_node((int)n));
-		j++;
-	}
-	free_matrix(tmp_argv);
-}
-
-static void	init_stacks(t_stack **a, t_stack **b, int argc, char **argv)
-{
-	int	i;
-
-	*a = NULL;
-	*b = NULL;
-	i = 1;
-	while (i < argc)
-	{
-		process_argument(a, argv[i]);
+		if (!syntax_control(temp_argv[i]))
+			error_handler(a, temp_argv, 1);
+		number = ft_atol(temp_argv[i]);
+		if (number > 2147483647 || number < -2147483648)
+			error_handler(a, temp_argv, 1);
+		if (duplicate_control(*a, (int)number))
+			error_handler(a, temp_argv, 1);
+		new_node = create_stack_node((int)number);
+		if (!new_node)
+			error_handler(a, temp_argv, 1);
+		add_stack_node_end(a, new_node);
 		i++;
 	}
+	free_split(temp_argv);
+}
+
+static void	sort(t_stack **a, t_stack **b)
+{
+	if (is_sorted(*a))
+		return ;
+	if (size_of_stack(*a) == 2)
+		op_sa(a);
+	else if (size_of_stack(*a) == 3)
+		sort_three(a);
+	else
+		run_turk(a, b);
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack	*a;
-	t_stack	*b;
+	t_stack *a;
+	t_stack *b;
+	int i;
 
 	if (argc < 2)
 		return (0);
-	init_stacks(&a, &b, argc, argv);
-	if (!is_sorted(a))
+	a = NULL;
+	b = NULL;
+	i = 1;
+	while (i < argc)
 	{
-		if (stack_size(a) == 2)
-			sa(&a);
-		else if (stack_size(a) == 3)
-			sort_three(&a);
-		else
-			sort_stack(&a, &b);
+		stack_up(&a, argv[i]);
+		i++;
 	}
+	sort(&a, &b);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

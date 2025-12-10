@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	free_matrix(char **argv)
+void	free_split(char **argv)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ t_stack	*create_stack_node(int value)
 	new_node = (t_stack *)malloc(sizeof(t_stack));
 	if (!new_node)
 		return (NULL);
-	new_node->value = value;
+	new_node->number = value;
 	new_node->next = NULL;
 	new_node->prev = NULL;
 	return (new_node);

@@ -14,10 +14,10 @@ CFILES = \
 	stack_utils.c \
 	stack_init.c \
 	sort_three.c \
-	turk_sort.c \
-	turk_init.c \
-	turk_cost.c \
-	turk_move.c
+	sort_algo.c \
+	init_algo.c \
+	cost_algo.c \
+	move_algo.c
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a

@@ -62,13 +62,13 @@ static void	push(t_stack **dst, t_stack **src)
 		add_to_dst(dst, tmp);
 }
 
-void	pa(t_stack **a, t_stack **b)
+void	op_pa(t_stack **a, t_stack **b)
 {
 	push(a, b);
 	ft_putstr_fd("pa\n", 1);
 }
 
-void	pb(t_stack **a, t_stack **b)
+void	op_pb(t_stack **a, t_stack **b)
 {
 	push(b, a);
 	ft_putstr_fd("pb\n", 1);

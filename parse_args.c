@@ -35,7 +35,7 @@ long	ft_atol(const char *str)
 	return (res * sign);
 }
 
-int	check_syntax(char *str_n)
+int	syntax_control(char *str_n)
 {
 	int	i;
 
@@ -55,7 +55,7 @@ int	check_syntax(char *str_n)
 	return (1);
 }
 
-int	check_duplicate(t_stack *a, int n)
+int	duplicate_control(t_stack *a, int n)
 {
 	t_stack	*tmp;
 
@@ -64,7 +64,7 @@ int	check_duplicate(t_stack *a, int n)
 	tmp = a;
 	while (1)
 	{
-		if (tmp->value == n)
+		if (tmp->number == n)
 			return (1);
 		tmp = tmp->next;
 		if (tmp == a)
